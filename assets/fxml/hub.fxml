@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" prefHeight="650.0" prefWidth="768.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+    <padding>
+        <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+    </padding>
+    <Label alignment="CENTER" text="Overview">
+        <font>
+            <Font size="24.0" />
+        </font>
+    </Label>
+    <HBox alignment="CENTER">
+        <VBox alignment="CENTER" prefWidth="300.0">
+            <Label text="Dashboard Title">
+                <font>
+                    <Font size="18.0" />
+                </font>
+                <VBox.margin>
+                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                </VBox.margin>
+            </Label>
+            <TextField fx:id="dashboardTitleField" promptText="Title" />
+            <padding>
+                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+            </padding>
+        </VBox>
+        <VBox alignment="CENTER" layoutX="283.0" layoutY="10.0" prefWidth="300.0">
+            <HBox alignment="CENTER">
+                <Label text="Icon">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                    <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </HBox.margin>
+                </Label>
+                <Button fx:id="dashboardIconButton" mnemonicParsing="false" onAction="#selectIconDialog" text="Choose">
+                    <HBox.margin>
+                        <Insets left="15.0" />
+                    </HBox.margin>
+                </Button>
+            </HBox>
+            <Label fx:id="dashboardIconText" alignment="CENTER" prefHeight="25.0" prefWidth="300.0" style="-fx-background-color: #dddddd; -fx-border-color: #aaaaaa; -fx-border-radius: 2;" text="" textFill="#aaaaaa" textOverrun="LEADING_ELLIPSIS">
+                <font>
+                    <Font name="Consolas Italic" size="14.0" />
+                </font>
+                <padding>
+                    <Insets bottom="3.0" top="3.0" />
+                </padding>
+            </Label>
+            <padding>
+                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+            </padding>
+        </VBox>
+    </HBox>
+    <CheckBox fx:id="searchCheckBox" mnemonicParsing="false" text="Search Bar Functionality">
+        <font>
+            <Font size="14.0" />
+        </font>
+    </CheckBox>
+    <HBox alignment="CENTER">
+        <VBox alignment="CENTER" prefWidth="300.0">
+            <Label text="Link Title">
+                <font>
+                    <Font size="18.0" />
+                </font>
+                <VBox.margin>
+                    <Insets top="12.0" />
+                </VBox.margin>
+            </Label>
+            <TextField fx:id="linkTitleField" promptText="Title">
+                <VBox.margin>
+                    <Insets bottom="12.0" />
+                </VBox.margin>
+            </TextField>
+            <Label layoutX="124.0" layoutY="144.0" text="Link Address">
+                <font>
+                    <Font size="18.0" />
+                </font>
+                <VBox.margin>
+                    <Insets top="12.0" />
+                </VBox.margin>
+            </Label>
+            <TextField fx:id="linkAddressField" layoutX="22.0" layoutY="176.0" promptText="Website URL">
+                <VBox.margin>
+                    <Insets bottom="12.0" />
+                </VBox.margin>
+            </TextField>
+         <CheckBox mnemonicParsing="false" selected="true" text="Validate Address" fx:id="validateAddress"/>
+            <Button fx:id="addLinkButton" mnemonicParsing="false" onAction="#addLink" text="Add Link" />
+            <padding>
+                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+            </padding>
+        </VBox>
+        <VBox alignment="CENTER">
+            <Label text="Links">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+            <ListView fx:id="existingLinkList" prefHeight="300.0" prefWidth="300.0" onMouseClicked="#editNode"/>
+            <Button fx:id="removeLinkButton" mnemonicParsing="false" onAction="#removeLink" text="Remove Selected">
+                <VBox.margin>
+                    <Insets top="10.0" />
+                </VBox.margin>
+            </Button>
+            <HBox.margin>
+                <Insets top="12.0" />
+            </HBox.margin>
+        </VBox>
+    </HBox>
+   <Button fx:id="submitButton" mnemonicParsing="false" onAction="#submit" text="Save" />
+   <Label fx:id="statusLabel" textFill="RED" />
+</VBox>

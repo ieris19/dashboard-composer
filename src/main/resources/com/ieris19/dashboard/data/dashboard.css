@@ -1,0 +1,251 @@
+:root {
+    /* Define custom CSS variables */
+    /* General Properties */
+    --logo-width: 150px;
+    --body-background: url('https://images.unsplash.com/photo-1532274402911-5a369e4c4bb5');
+    --font-size: 1rem;
+    --base-text-color: #fff;
+    --base-text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    --base-background: rgba(0, 0, 0, 0.5);
+    --base-background-highlight: rgba(0, 0, 0, 0.7);
+    --link-text-color: #aac;
+    --highlight-color: #dadfac;
+    /* Dashboard Styling */
+    --dash-background: rgba(255, 255, 255, 0.2);
+    --header-text-shadow: var(--base-text-shadow);
+    /* Header Styling */
+    --content-text-color: var(--base-text-color);
+    /* Search Styling */
+    --search-text-color: var(--base-text-color);
+    --search-text-shadow: var(--base-text-shadow);
+    --search-background: var(--base-background);
+    --search-background-highlight: var(--base-background-highlight);
+    /* Button Grid Styling */
+    --grid-gap: 20px;
+    --grid-text-color: var(--base-text-color);
+    --grid-text-shadow: var(--base-text-shadow);
+    --grid-background: var(--base-background);
+    --grid-background-highlight: var(--base-background-highlight);
+    /* Text Card Styling */
+    --text-card-background: var(--base-background);
+    --card-text-color: var(--base-text-color);
+    --card-text-shadow: var(--base-text-shadow);
+}
+
+/* region General Element Styling */
+
+/* Reset default browser styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    /* Set the background image for the body */
+    background-image: var(--body-background); /* Replace with your background image URL */
+    background-size: cover;
+}
+
+/* Customize the main heading style */
+/*noinspection CssInvalidPropertyValue*/
+:is(h1, h2, h3, h4, h5, h6, p) {
+    color: var(--content-text-color);
+    text-shadow: var(--header-text-shadow);
+    text-align: center;
+    text-wrap: balance;
+}
+
+h1 {
+    font-size: calc(var(--font-size) * 2);
+}
+
+/* Secondary heading style */
+h2 {
+    font-size: calc(var(--font-size) * 1.5);
+}
+
+/* Customize the paragraph text style */
+p {
+    font-size: var(--font-size);
+}
+
+/* Custimize the link style */
+a, a:visited {
+    color: var(--link-text-color);
+    text-decoration: none;
+    text-shadow: var(--header-text-shadow);
+}
+
+a:hover {
+    text-decoration: underline;
+    text-shadow: none;
+}
+
+:is(input, a, button):focus {
+    outline: none;
+    box-shadow: 0 0 10px 2px var(--highlight-color);
+}
+
+/* endregion General Element Styling */
+
+/* region Dashboard Styling */
+
+/* Logo Styling */
+#logo {
+    width: var(--logo-width);
+}
+
+/* Create a central dashboard layout */
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* Ensure content is vertically centered */
+    min-height: 100vh;
+    /* Add a translucent background with blur effect */
+    background-color: var(--dash-background);
+    backdrop-filter: blur(3px);
+    background-size: cover;
+    position: relative;
+}
+
+/* region Button Grid Styling */
+
+/* Create a grid for buttons */
+.button-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--grid-gap);
+    margin-top: 1rem;
+}
+
+/* Customize the button style */
+.button-grid a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 30px;
+    font-size: 24px;
+    color: var(--grid-text-color);
+    background-color: var(--grid-background);
+    text-decoration: none;
+    text-shadow: var(--header-text-shadow);
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    flex-basis: auto;
+}
+
+/* Style for optional button icons */
+.button-grid a img {
+    width: auto;
+    height: 24px;
+    margin-right: 10px;
+}
+
+/* Button hover effect */
+.button-grid a:hover {
+    background-color: var(--grid-background-highlight)
+}
+
+/* endregion Button Grid Styling */
+
+/* region Text Card Styling */
+
+/* Create a text card or description */
+.text-card {
+    width: 80%;
+    padding: 20px;
+    background-color: var(--text-card-background);
+    border-radius: 10px;
+    margin-top: 60px;
+    text-align: center;
+}
+
+/* Customize the text card heading style */
+.text-card h2 {
+    font-size: calc(var(--font-size) * 1.5);
+    color: var(--card-text-color);
+    text-shadow: var(--card-text-shadow);
+    margin: 10px auto;
+}
+
+/* Customize the text card paragraph style */
+.text-card p {
+    font-size: 18px;
+    color: var(--card-text-color);
+    text-shadow: var(--card-text-shadow);
+    margin-bottom: 10px;
+}
+
+/* endregion Text Card Styling */
+
+/* region Search Styling */
+
+.search {
+    --_spacing-unit: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: var(--_spacing-unit);
+}
+
+.search label {
+    font-size: calc(var(--font-size) * 1.8);
+    color: var(--search-text-color);
+    text-shadow: var(--search-text-shadow);
+    margin-right: var(--_spacing-unit);
+}
+
+.search input {
+    background: var(--search-background);
+    color: var(--search-text-color);
+    padding: var(--_spacing-unit);
+    font-size: var(--font-size);
+    border-radius: 15px;
+    margin-right: var(--_spacing-unit);
+}
+
+.search button {
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 5px;
+    border: none;
+    background-color: var(--search-background);
+    text-shadow: var(--search-text-shadow);
+    transition: background-color 0.3s ease;
+}
+
+.search button:hover {
+    background-color: var(--search-background-highlight);
+}
+
+/* endregion Search Styling */
+
+/* region Footer Styling */
+
+footer {
+    position: absolute;
+    bottom: 5px;
+    width: 100%;
+}
+
+/* endregion Footer Styling */
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+    .dashboard {
+        padding: 20px;
+    }
+
+    /* Adjust button grid for smaller screens */
+    .button-grid {
+        flex-direction: column;
+    }
+
+    .button-grid a {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+/* endregion Dashboard Styling */
