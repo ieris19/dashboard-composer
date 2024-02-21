@@ -1,6 +1,6 @@
 package com.ieris19.dashboard.view;
 
-import com.ieris19.dashboard.data.Dashboard;
+import com.ieris19.dashboard.data.DashboardBuilder;
 import com.ieris19.dashboard.data.DashboardLink;
 import com.ieris19.dashboard.model.ComposerModel;
 import com.ieris19.lib.ui.mvvm.Model;
@@ -21,7 +21,6 @@ public class HubViewModel extends ViewModel {
     private final BooleanProperty dashboardSearchBox;
     private final StringProperty linkTitle;
     private final StringProperty linkAddress;
-    private final BooleanProperty validateAddress;
     private final ListProperty<DashboardLink> dashboardLinks;
     private final StringProperty status;
     private ComposerModel model;
@@ -34,7 +33,6 @@ public class HubViewModel extends ViewModel {
         this.dashboardIconText = new SimpleStringProperty("");
         this.linkTitle = new SimpleStringProperty("");
         this.linkAddress = new SimpleStringProperty("");
-        this.validateAddress = new SimpleBooleanProperty(true);
         this.dashboardSearchBox = new SimpleBooleanProperty(true);
         this.dashboardLinks = new SimpleListProperty<>();
         this.status = new SimpleStringProperty();
@@ -56,8 +54,6 @@ public class HubViewModel extends ViewModel {
                     linkTitle.bindBidirectional((StringProperty) property);
             case "LINK_ADDRESS" ->
                     linkAddress.bindBidirectional((StringProperty) property);
-            case "LINK_VALIDATE" ->
-                    validateAddress.bindBidirectional((BooleanProperty) property);
             case "DASHBOARD_SEARCH_BOX" ->
                     dashboardSearchBox.bindBidirectional((BooleanProperty) property);
             case "LINK_LIST" ->
@@ -70,15 +66,14 @@ public class HubViewModel extends ViewModel {
     }
 
     public void reset() {
-        Dashboard current = model.getCurrentDashboard();
-        this.dashboardIcon = current.getIconSource();
-        this.dashboardTitle.set(current.getDashboardTitle().isBlank() ? "" : current.getDashboardTitle());
-        this.dashboardIconText.set(current.getIconSource() == null ? "Icon Path" : current.getIconSource().getAbsolutePath());
+        DashboardBuilder current = model.getCurrentDashboard();
+        this.dashboardIcon = current.getIcon();
+        this.dashboardTitle.set(current.getTitle().isBlank() ? "" : current.getTitle());
+        this.dashboardIconText.set(current.getIcon() == null ? "Icon Path" : current.getIcon().getAbsolutePath());
         clearLinkForm();
-        this.dashboardSearchBox.set(current.isSearchBox());
-        this.validateAddress.set(true);
-        if (current.getLinkList() != null)
-            this.dashboardLinks.setAll(current.getLinkList());
+        this.dashboardSearchBox.set(current.hasSearch());
+        if (current.getLinks() != null)
+            this.dashboardLinks.setAll(current.getLinks());
         else
             this.dashboardLinks.clear();
         this.status.set("");
@@ -118,20 +113,13 @@ public class HubViewModel extends ViewModel {
     public void addLink() {
         String errorMessage = "Invalid URL provided";
         try {
-            if (validateAddress.get()) {
-                String logMessage = "Verifying link...";
-                status.set(logMessage);
-                log.debug(logMessage);
-                if (DashboardLink.verifyURL(this.linkAddress.getValueSafe()))
-                    throw new MalformedURLException("Invalid URL");
-            }
             DashboardLink link = new DashboardLink(
                     this.linkTitle.getValueSafe(),
                     this.linkAddress.getValueSafe());
             status.set("");
             if (currentlyEditing >= 0) {
                 dashboardLinks.set(currentlyEditing, link);
-                currentlyEditing = -1;
+                clearLinkEdit();
                 return;
             }
             this.dashboardLinks.add(link);
@@ -141,8 +129,13 @@ public class HubViewModel extends ViewModel {
         }
     }
 
+    public void clearLinkEdit() {
+        currentlyEditing = -1;
+        clearLinkForm();
+    }
     public void removeLink(int index) {
         dashboardLinks.remove(index);
+        clearLinkEdit();
     }
 
     public void editNode(int selectedItem) {

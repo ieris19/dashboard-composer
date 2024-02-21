@@ -2,17 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" type="image/x-icon" href="assets/images/$iconName">
+    <link rel="icon" type="image/x-icon" href="">
     <title>$title</title>
     <link rel="stylesheet" type="text/css" href="assets/styles/dashboard.css">
     <script type="application/javascript" src="assets/scripts/dashboard.js"></script>
 </head>
-<body>
+<body class="backdrop">
 <div class="dashboard">
-    <img id="logo" src="assets/images/$iconName" alt="Logo">
-    <h1>$title</h1>
-    $search
-    $grid
+    <img id="logo" src="" alt="Logo">
+
+    <h1 id="dashboard-title"></h1>
+
+    <div class="search">
+        <label for="search-bar">Google: </label>
+        <input type="text" id="search-bar" placeholder="Search...">
+        <button id="search-btn">
+            &#x1F50E;
+        </button>
+        <script type="application/javascript">
+            console.log("Loading searchbar.js");
+            addSearchBarJS();
+        </script>
+    </div>
+
+    <div class="button-grid"></div>
+
     <footer>
         <p>Made by <a href="https://github.com/ieris19" target="_blank">ieris19</a></p>
     </footer>

@@ -20,20 +20,6 @@ public class DashboardLink {
         this.url = url;
     }
 
-    public static boolean verifyURL(String url) {
-        if (!(url.startsWith("https://") || url.startsWith("http://") || url.startsWith("file://")))
-            return false;
-        try (InputStream stream = new URL(url).openStream()) {
-            List<Integer> integers = new ArrayList<>();
-            while (stream.available() > 0 && integers.isEmpty()) {
-                integers.add(stream.read());
-            }
-            return !integers.isEmpty();
-        } catch (IOException e) {
-            return false;
-        }
-    }
-
     @Override
     public String toString() {
         return title + ' ' + '(' + url + ')';

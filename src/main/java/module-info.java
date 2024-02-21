@@ -10,6 +10,8 @@ module dashboard.composer {
     requires javafx.controls;
     requires javafx.fxml;
 
+    requires org.jsoup;
+
     requires ierislib.common;
     requires ierislib.files.config;
     requires ierislib.ui;

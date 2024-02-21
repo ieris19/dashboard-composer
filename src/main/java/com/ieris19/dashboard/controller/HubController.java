@@ -33,8 +33,6 @@ public class HubController extends ViewController {
     @FXML
     private Button addLinkButton;
     @FXML
-    private CheckBox validateAddress;
-    @FXML
     private ListView<DashboardLink> existingLinkList;
     @FXML
     private Button removeLinkButton;
@@ -50,6 +48,7 @@ public class HubController extends ViewController {
         super.init(viewManager, view, root);
         this.viewModel = (HubViewModel) view.getViewModel();
         setBindings();
+        this.existingLinkList.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         reset();
     }
 
@@ -65,7 +64,6 @@ public class HubController extends ViewController {
         viewModel.bind("DASHBOARD_SEARCH_BOX", searchCheckBox.selectedProperty());
         viewModel.bind("LINK_TITLE", linkTitleField.textProperty());
         viewModel.bind("LINK_ADDRESS", linkAddressField.textProperty());
-        viewModel.bind("LINK_VALIDATE", validateAddress.selectedProperty());
         viewModel.bind("LINK_LIST", existingLinkList.itemsProperty());
         viewModel.bind("STATUS", statusLabel.textProperty());
     }
@@ -87,6 +85,12 @@ public class HubController extends ViewController {
     public void addLink() {
         log.debug("Adding a link");
         viewModel.addLink();
+    }
+
+    public void clearEditLink() {
+        log.debug("Clearing a link");
+        this.existingLinkList.getSelectionModel().clearSelection();
+        viewModel.clearLinkEdit();
     }
 
     public void removeLink() {

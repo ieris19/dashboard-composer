@@ -91,7 +91,6 @@
                     <Insets bottom="12.0" />
                 </VBox.margin>
             </TextField>
-         <CheckBox mnemonicParsing="false" selected="true" text="Validate Address" fx:id="validateAddress"/>
             <Button fx:id="addLinkButton" mnemonicParsing="false" onAction="#addLink" text="Add Link" />
             <padding>
                 <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
@@ -103,12 +102,21 @@
                     <Font size="18.0" />
                 </font>
             </Label>
-            <ListView fx:id="existingLinkList" prefHeight="300.0" prefWidth="300.0" onMouseClicked="#editNode"/>
-            <Button fx:id="removeLinkButton" mnemonicParsing="false" onAction="#removeLink" text="Remove Selected">
-                <VBox.margin>
-                    <Insets top="10.0" />
-                </VBox.margin>
-            </Button>
+            <ListView fx:id="existingLinkList" onMouseClicked="#editNode" prefHeight="300.0" prefWidth="300.0" />
+            <HBox alignment="CENTER">
+                <Button fx:id="clearButton" mnemonicParsing="false" text="Clear"
+                        onAction="#clearEditLink">
+                    <HBox.margin>
+                        <Insets right="16.0"/>
+                    </HBox.margin>
+                </Button>
+                <Button fx:id="removeLinkButton" mnemonicParsing="false"
+                        onAction="#removeLink" text="Remove Selected">
+                    <HBox.margin>
+                        <Insets left="16.0"/>
+                    </HBox.margin>
+                </Button>
+            </HBox>
             <HBox.margin>
                 <Insets top="12.0" />
             </HBox.margin>
